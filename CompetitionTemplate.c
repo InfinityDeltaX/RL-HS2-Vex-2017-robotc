@@ -240,10 +240,10 @@ task autonomous()
 	int stoppingDelay = 800;
 
 	float armPercentageSide = 0.9;
-	float armPercentageMiddle = 0.83;
+	float armPercentageMiddle = 0.85;
 
 	int backFromFenceTime = 1000;
-	int sidewaysAtFenceTime = 1700;
+	int sidewaysAtFenceTime = 2000;
 	int fromStartToFenceTime = 2100;
 
 	nMotorPIDSpeedCtrl[drivemotor1] = RegIdle;
@@ -274,7 +274,7 @@ task autonomous()
 
 
 	//setAbsoluteHeading(0);
-	moveRelative(movespeed, side * ( - movespeed / 3.0), 0);
+	moveRelative(movespeed, side * ( - movespeed * 2.7/10.0), 0);
 	//moveAndRotateGyro(movespeed, side * ( - movespeed / 3.0), 0);
 	wait1Msec(fromStartToFenceTime*delayfactor*1.12);
 	stopDrive();
