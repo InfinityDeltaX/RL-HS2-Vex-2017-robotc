@@ -159,6 +159,7 @@ float clawHighPowerCutoffOpening = 0.7;
 float clawHighPowerCutoffClosing = 0.7;
 int mostRecentClawInstruction = 0;
 int targetClawPosition = -1;
+int fullSpeedTimeOut = 700; // @K: HOW LONG THE CLAW CLOSES
 
 int robotwidthMM =  450;
 int robotlengthMM = 450;
@@ -948,14 +949,14 @@ void automaticClaw(){
 
 		int delta = targetClawPosition - sensorVal;
 
-		int fullSpeedTimeOut = 700;
+
 
 		//positive numbers are closing.
 
 		if(targetClawPosition == clawpotopenval) { //opening
 
 			if(Time1[T1] < fullSpeedTimeOut){ //% remaining to closed. More than clawHighPowerCutoffClosing remaining.
-				speed = 70; //closing
+				speed = clawSpeed; //closing
 			} else {
 				speed = clawIdleSpeedOpening; //no stalling value.
 			}
@@ -963,7 +964,7 @@ void automaticClaw(){
 		} else if (targetClawPosition == clawpotclosedval) { //closing
 
 			if(Time1[T1] < fullSpeedTimeOut){ //% remaining.
-				speed = -70;
+				speed = -1 * clawSpeed;
 			} else {
 				speed = -1 * clawIdleSpeedClosing; //no stalling value.
 			}
@@ -980,7 +981,7 @@ void automaticClaw(){
 		}
 		*/
 
-		writeDebugStreamLine("pot: %d, target: %d, speed: %d, delta: %d, percentage: %f", sensorVal, targetClawPosition, speed, delta, abs((sensorVal - clawpotopenval) / (float) (clawpotclosedval - clawpotopenval)));
+		//writeDebugStreamLine("pot: %d, target: %d, speed: %d, delta: %d, percentage: %f", sensorVal, targetClawPosition, speed, delta, abs((sensorVal - clawpotopenval) / (float) (clawpotclosedval - clawpotopenval)));
 
 		setClawSpeed(speed);
 }
