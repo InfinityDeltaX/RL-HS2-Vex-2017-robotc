@@ -273,14 +273,14 @@ task autonomous()
 	setClawOpenPos();
 
 
-	setAbsoluteHeading(0);
+	//setAbsoluteHeading(0);
 	moveRelative(movespeed, side * ( - movespeed / 3.0), 0);
 	//moveAndRotateGyro(movespeed, side * ( - movespeed / 3.0), 0);
 	wait1Msec(fromStartToFenceTime*delayfactor*1.12);
 	stopDrive();
 	wait1Msec(stoppingDelay); //drive up to fence; push stars over.
 
-	setAbsoluteHeading(0);
+	//setAbsoluteHeading(0);
 	moveRelative(-1 * movespeed, 0, 0); //drive back.
 	//moveAndRotateGyro(-1 * movespeed, 0, 0);
 	wait1Msec(backFromFenceTime*delayfactor);
@@ -290,14 +290,14 @@ task autonomous()
 	setArmPos((armPercentageMiddle * (armpothighval - armpotlowval)) + armpotlowval);
 	wait1Msec(1000);
 
-	setAbsoluteHeading(0);
+	//setAbsoluteHeading(0);
 	moveRelative(0, side*movespeed, 0); //drive sideways
 	//moveAndRotateGyro(0, side*movespeed, 0);
 	wait1Msec(sidewaysAtFenceTime*delayfactor);
 	stopDrive();
 	wait1Msec(stoppingDelay);
 
-	setAbsoluteHeading(0);
+	//setAbsoluteHeading(0);
 	moveRelative(movespeed, 0, 0); //drive forwards to hit off middle stars
 	//moveAndRotateGyro(movespeed, 0, 0);
 	wait1Msec(backFromFenceTime*delayfactor);
@@ -489,34 +489,6 @@ void setAbsoluteHeading(float heading){ //0 -> 0. 180 -> 180. 360 -> 0. -360 -> 
 
 	stopDrive();
 }
-/*
-void moveAbsoluteWithRotation(int fieldX, int fieldY, float targetfieldAngle, int speed){
-	int xdelta = fieldX - currentPositionX;
-	int ydelta = fieldY - currentPositionY;
-
-	float movementAngle = computeAngleFromDeltas(xdelta, ydelta);
-	//int rdelta = fieldR - currentPositionR;
-
-	int distance = sqrt(xdelta*xdelta + ydelta*ydelta);
-
-	float startRAngle = computeAngleFromR(currentPositionR);
-	float endRAngle = targetfieldAngle-startRAngle;
-
-	int delayTime = distance/speed/steps*100;
-	float yawAnglePerSecond = turnByAngle/delayTime*100;
-
-	for(int i = 0; i < steps; i++){
-		//movementAngle
-		alternateBlinkers();
-		movePolarRelative(movementAngle-currentRAngle, speed);
-		addConcurrentYawAnglePerSecond(yawAnglePerSecond);
-		delay(delayTime);
-		currentRAngle += turnByAngle;
-	}
-
-	//int //in the same amount of time we need to complete rdelta turns.
-}
-*/
 
 void moveAndRotateGyro(int verticalstick, int horizontalstick, int rotateSpeed) {
 		float currentRAngle = getGyroAngle();
@@ -1117,6 +1089,39 @@ void clawControl(){
 			}
 
 		}
+*/
+
+/*
+
+/*
+void moveAbsoluteWithRotation(int fieldX, int fieldY, float targetfieldAngle, int speed){
+	int xdelta = fieldX - currentPositionX;
+	int ydelta = fieldY - currentPositionY;
+
+	float movementAngle = computeAngleFromDeltas(xdelta, ydelta);
+	//int rdelta = fieldR - currentPositionR;
+
+	int distance = sqrt(xdelta*xdelta + ydelta*ydelta);
+
+	float startRAngle = computeAngleFromR(currentPositionR);
+	float endRAngle = targetfieldAngle-startRAngle;
+
+	int delayTime = distance/speed/steps*100;
+	float yawAnglePerSecond = turnByAngle/delayTime*100;
+
+	for(int i = 0; i < steps; i++){
+		//movementAngle
+		alternateBlinkers();
+		movePolarRelative(movementAngle-currentRAngle, speed);
+		addConcurrentYawAnglePerSecond(yawAnglePerSecond);
+		delay(delayTime);
+		currentRAngle += turnByAngle;
+	}
+
+	//int //in the same amount of time we need to complete rdelta turns.
+}
+
+
 */
 
 //------------END--------------
