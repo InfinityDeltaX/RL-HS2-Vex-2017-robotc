@@ -240,7 +240,7 @@ task autonomous()
 	int stoppingDelay = 800;
 
 	float armPercentageSide = 0.9;
-	float armPercentageMiddle = 0.85;
+	float armPercentageMiddle = 0.83;
 
 	int backFromFenceTime = 1000;
 	int sidewaysAtFenceTime = 2000;
@@ -266,7 +266,7 @@ task autonomous()
 
 	sensor_init();
 
-	wait1Msec(1500);
+	wait1Msec(200);
 
 	setArmPos((armPercentageSide * (armpothighval - armpotlowval)) + armpotlowval); //deploy
 
@@ -300,7 +300,7 @@ task autonomous()
 	//setAbsoluteHeading(0);
 	moveRelative(movespeed, 0, 0); //drive forwards to hit off middle stars
 	//moveAndRotateGyro(movespeed, 0, 0);
-	wait1Msec(backFromFenceTime*delayfactor);
+	wait1Msec(backFromFenceTime*delayfactor*1.7);
 	stopDrive();
 	wait1Msec(stoppingDelay);
 
